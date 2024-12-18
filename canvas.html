@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bubbles App</title>
+    <style>
+        
+
+h1{
+  font-family: Sans-Serif;
+  text-align: center;
+}
+canvas{
+  border-width: 10px;
+  border-color: black;
+  border-style: solid;
+  display: block;         
+  margin: auto;          
+ 
+}
+button{
+display: block; 
+margin: 10px auto;
+}
+
+
+
+    </style>
+</head>
+<body>
+    <h1> Bubbles App</h1>
+    <canvas id="mycanvas" height="600px" width="600px"></canvas>
+    <button id="hit" onclick="hitButton()">HIT</button>
+    <button id="reset" onclick="resetButton()">RESET</button>
+
+    <script>
+        var circle = document.getElementById("mycanvas");
+        var c1 = circle.getContext("2d");
+        var ax = 580;  
+        var ay = 240;  
+        var interval;  
+       
+        function draw() {
+            c1.beginPath();
+            c1.arc(100, 230, 50, 0, 2 * Math.PI);
+            c1.stroke();
+            c1.fillStyle =ax < 180 ? "blue" : "red"; 
+            c1.fill();
+
+            c1.beginPath();
+            c1.moveTo(ax, ay);
+            c1.lineTo(ax - 20, 240);
+            c1.lineWidth = 1.5;
+            c1.stroke();
+
+        }
+        function moveArrow() {
+            ax -= 10; 
+            c1.clearRect(0, 0, 600, 600);
+            draw();
+
+            if (ax < 180) {
+                clearInterval(interval);    
+            }
+        }
+        function hitButton() {
+            interval = setInterval(moveArrow, 100); 
+        }
+        function resetButton() {
+            ax = 580; 
+            c1.clearRect(0, 0, 600, 600); 
+            draw(); 
+        }
+        draw();
+    </script>
+    
+</body>
+</html>
